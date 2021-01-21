@@ -1,18 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ul>
+      <li v-for="(beer, index) in getBeers" :key="index">
+        {{ beer.id }} - {{ beer.name }}
+      </li>
+    </ul>
   </div>
 </template>
-
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { mapActions, mapGetters } from "vuex";
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  computed: {
+    ...mapGetters(["getPage", "getUrl", "getBeers"]),
+  },
+  methods: {
+    ...mapActions(["getData"]),
+  },
+
+  created() {
+    this.getData(this.getUrl + this.getPage);
+  },
+};
 </script>
