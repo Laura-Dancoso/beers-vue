@@ -6,7 +6,7 @@
       variant="light"
     >
       <div>
-        <b-navbar-brand class="p-0 ml-1" to="/" exact>
+        <b-navbar-brand class="p-0 ml-1 text-secondary" to="/" exact>
           <img
             class="img-fluid pb-1"
             src="../assets/beer.png"
@@ -21,6 +21,8 @@
       <div class="flex-grow-1">
         <b-form-input
           v-model="inputSearch"
+          trim
+          variant="secondary"
           type="search"
           placeholder="Search........"
           autofocus

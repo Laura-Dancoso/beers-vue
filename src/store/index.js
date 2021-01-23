@@ -7,12 +7,13 @@ export default new Vuex.Store({
   state: {
     beers: [],
     page: 1,
-    url: `https://api.punkapi.com/v2/beers?page=`,
+    url: `https://api.punkapi.com/v2/beers?`,
+    next: "",
+    previous: "",
   },
   getters: {
     getBeers: (state) => state.beers,
     getPage: (state) => state.page,
-    getUrl: (state) => state.url,
   },
   mutations: {
     getBeers: function(state, beers) {
@@ -20,8 +21,8 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    getData: async function({ commit }, url) {
-      const data = await fetch(url);
+    getData: async function(context, endpoint) {
+      const data = await fetch(context.state.url + endpoint);
       if (data.ok) {
         const json = await data.json();
         const jsonBeers = json.map((beer) => {
@@ -34,7 +35,7 @@ export default new Vuex.Store({
             image_url: beer.image_url,
           };
         });
-        commit("getBeers", jsonBeers);
+        context.commit("getBeers", jsonBeers);
       } else {
         alert(data.status);
       }

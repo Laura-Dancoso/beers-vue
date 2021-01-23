@@ -9,8 +9,8 @@
       ]"
     ></div>
     <ul>
-      <li v-for="(beer, index) in getBeers" :key="index">
-        {{ beer.id }} - {{ beer.name }}
+      <li class="text-secondary" v-for="(beer, index) in getBeers" :key="index">
+        <img :src="beer.image_url" alt="" srcset="" />
       </li>
     </ul>
   </div>
@@ -24,14 +24,14 @@ export default {
     Navbar,
   },
   computed: {
-    ...mapGetters(["getPage", "getUrl", "getBeers"]),
+    ...mapGetters(["getPage", "getBeers"]),
   },
   methods: {
     ...mapActions(["getData"]),
   },
 
   created() {
-    this.getData(this.getUrl + this.getPage);
+    this.getData(`page${this.getPage}`);
   },
 };
 </script>
