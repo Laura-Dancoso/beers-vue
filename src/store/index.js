@@ -5,11 +5,9 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    page: "",
     beers: [],
-    page: 1,
     url: `https://api.punkapi.com/v2/beers?`,
-    next: "",
-    previous: "",
   },
   getters: {
     getBeers: (state) => state.beers,
@@ -19,10 +17,17 @@ export default new Vuex.Store({
     getBeers: function(state, beers) {
       state.beers = beers;
     },
+    getPage: function(state, page) {
+      state.page = page;
+    },
   },
   actions: {
     getData: async function(context, endpoint) {
-      const data = await fetch(context.state.url + endpoint);
+      const url =
+        endpoint.filter === ""
+          ? `${context.state.url}page=${endpoint.page}`
+          : `${context.state.url}${endpoint.filter}&page=${endpoint.page}`;
+      const data = await fetch(url);
       if (data.ok) {
         const json = await data.json();
         const jsonBeers = json.map((beer) => {
@@ -36,6 +41,7 @@ export default new Vuex.Store({
           };
         });
         context.commit("getBeers", jsonBeers);
+        context.commit("getPage", endpoint.page);
       } else {
         alert(data.status);
       }
