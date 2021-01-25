@@ -6,7 +6,12 @@
       variant="light"
     >
       <div>
-        <b-navbar-brand class="p-0 ml-1 text-secondary" to="/" exact>
+        <b-navbar-brand
+          class="p-0 ml-1 text-secondary"
+          to="/"
+          @click="scrollToTop"
+          exact
+        >
           <img
             class="img-fluid pb-1"
             src="../assets/beer.png"
@@ -53,6 +58,11 @@ export default {
     return {
       inputSearch: "",
     };
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
   },
 };
 </script>
