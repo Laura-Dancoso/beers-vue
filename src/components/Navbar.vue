@@ -26,11 +26,15 @@
       <div class="flex-grow-1">
         <b-form-input
           v-model="search"
+          @input="checkSearchClickValue"
           trim
           variant="secondary"
           type="search"
-          placeholder="Search........"
+          placeholder="Search a beer"
           autofocus
+          v-on:keyup.enter="
+            if (search.length > 0) $store.commit('changeSearchClick', true);
+          "
         >
         </b-form-input>
       </div>
@@ -57,6 +61,13 @@ export default {
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+    checkSearchClickValue() {
+      if (this.$store.getters.getSearch == "")
+        this.$store.commit("changeSearchClick", false);
+    },
+    enter() {
+      this.$store.commit("updateSearch", "");
     },
   },
   computed: {

@@ -12,11 +12,13 @@ export default new Vuex.Store({
     url: `https://api.punkapi.com/v2/beers?`,
     search: "",
     searchedBeers: [],
+    searchClick: false,
   },
   getters: {
     getBeers: (state) => state.beers,
     getPage: (state) => state.page,
     getSearch: (state) => state.search,
+    getSearchClick: (state) => state.searchClick,
   },
   mutations: {
     getBeers: function(state, payload) {
@@ -27,6 +29,9 @@ export default new Vuex.Store({
     },
     updateSearch(state, search) {
       state.search = search;
+    },
+    changeSearchClick(state, click) {
+      state.searchClick = click;
     },
   },
   actions: {
@@ -41,10 +46,7 @@ export default new Vuex.Store({
         const jsonBeers = json.map((beer) => {
           return {
             id: beer.id,
-            name:
-              beer.name.length > 23
-                ? beer.name.slice(0, 23) + "..."
-                : beer.name,
+            name: beer.name,
             description: beer.description,
             abv: beer.abv,
             ibu: beer.ibu,

@@ -2,9 +2,35 @@
   <div class="home">
     <b-container class="p-0 m-0" fluid>
       <Navbar></Navbar>
+      <h5
+        :class="[
+          'text-center',
+          { largePadding: $mq == 'mobile', smallPadding: $mq != 'mobile' },
+        ]"
+        v-if="filterSearchedBeers.length === 0"
+      >
+        No se encontraron resultados para {{ getSearch }}
+      </h5>
+      <h5
+        :class="[
+          'text-center',
+          { largePadding: $mq == 'mobile', smallPadding: $mq != 'mobile' },
+        ]"
+        v-if="
+          getSearchClick &&
+            filterSearchedBeers.length > 0 &&
+            getSearch.length > 0
+        "
+      >
+        Estos son los resultados para {{ getSearch }}
+      </h5>
       <b-row
         :class="[
-          { largePadding: $mq == 'mobile', smallPadding: $mq != 'mobile' },
+          {
+            largePadding: $mq == 'mobile',
+            smallPadding: $mq != 'mobile',
+            'pt-1': getSearchClick && getSearch.length > 0,
+          },
         ]"
         ><b-col
           class="box"
@@ -30,7 +56,7 @@ export default {
     Card,
   },
   computed: {
-    ...mapGetters(["getBeers", "getPage", "getSearch"]),
+    ...mapGetters(["getBeers", "getPage", "getSearch", "getSearchClick"]),
     filterSearchedBeers() {
       return this.getBeers.filter((b) =>
         b.name.toLowerCase().includes(this.getSearch)
@@ -67,9 +93,18 @@ export default {
   .card-body {
     padding-bottom: 0;
   }
+  .card-title {
+  }
 }
 .bottom {
   position: absolute;
   bottom: 0;
+}
+.container .card-body {
+  min-width: 200px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 </style>
