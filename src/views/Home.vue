@@ -11,7 +11,7 @@
           cols="12"
           md="6"
           lg="4"
-          v-for="(beer, index) in getBeers"
+          v-for="(beer, index) in filterSearchedBeers"
           :key="index"
         >
           <Card :url="beer.image_url" :beer="beer"></Card> </b-col
@@ -30,12 +30,11 @@ export default {
     Card,
   },
   computed: {
-    ...mapGetters(["getBeers", "getPage"]),
-    next: () => {
-      return this.getPage != 13 ? this.getPage + 1 : "";
-    },
-    previous: () => {
-      return this.getPage != 1 ? this.getPage - 1 : "";
+    ...mapGetters(["getBeers", "getPage", "getSearch"]),
+    filterSearchedBeers() {
+      return this.getBeers.filter((b) =>
+        b.name.toLowerCase().includes(this.getSearch)
+      );
     },
   },
   methods: {
@@ -64,6 +63,9 @@ export default {
   transition: box-shadow 0.3s ease-in-out;
   &:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  .card-body {
+    padding-bottom: 0;
   }
 }
 .bottom {

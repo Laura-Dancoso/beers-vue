@@ -4,21 +4,29 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  //change to false when project is in production
+  strict: true,
   state: {
     page: "",
     beers: [],
     url: `https://api.punkapi.com/v2/beers?`,
+    search: "",
+    searchedBeers: [],
   },
   getters: {
     getBeers: (state) => state.beers,
     getPage: (state) => state.page,
+    getSearch: (state) => state.search,
   },
   mutations: {
-    getBeers: function(state, beers) {
-      state.beers = beers;
+    getBeers: function(state, payload) {
+      state.beers = payload;
     },
-    getPage: function(state, page) {
-      state.page = page;
+    getPage: function(state, payload) {
+      state.page = payload;
+    },
+    updateSearch(state, search) {
+      state.search = search;
     },
   },
   actions: {
@@ -33,7 +41,10 @@ export default new Vuex.Store({
         const jsonBeers = json.map((beer) => {
           return {
             id: beer.id,
-            name: beer.name,
+            name:
+              beer.name.length > 23
+                ? beer.name.slice(0, 23) + "..."
+                : beer.name,
             description: beer.description,
             abv: beer.abv,
             ibu: beer.ibu,

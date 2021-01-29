@@ -1,6 +1,5 @@
 <template lang="">
   <div>
-    <!-- ver: https://bootstrap-vue.org/docs/components/card#horizontal-card-layout -->
     <b-card
       :img-src="url"
       img-alt="Beer image"
@@ -8,23 +7,42 @@
       img-width="15%"
       class="p-2 pl-4 mx-auto my-1"
     >
-      <b-card-body class="p-0">
-        <b-card-title class="text-left m-0">{{ beer.name }}</b-card-title>
-      </b-card-body>
-      <b-list-group flush class="bottom pb-2">
-        <b-list-group-item class="px-0 font-weight-bold"
-          >{{ beer.abv }}% ABV</b-list-group-item
+      <b-container>
+        <b-card-body class="p-0">
+          <b-card-title class="h6 font-weight-bold m-0 text-left">{{
+            beer.name
+          }}</b-card-title>
+        </b-card-body>
+        <b-list-group
+          flush
+          class="text-left"
+          :class="[
+            {
+              'pt-4': $mq === 'mobile',
+              'pt-3': $mq == 'tablet',
+              'pt-2': $mq == 'laptop',
+              'pt-5': $mq == 'desktop',
+            },
+          ]"
         >
-        <b-list-group-item class="px-0 font-weight-bold"
-          >{{ beer.ibu }} IBU</b-list-group-item
-        >
-      </b-list-group>
+          <b-list-group-item class="h6 font-weight-light px-0 py-0"
+            >{{ beer.abv }}% ABV</b-list-group-item
+          >
+          <b-list-group-item class="h6 font-weight-light px-0"
+            >{{ beer.ibu }} IBU</b-list-group-item
+          >
+        </b-list-group>
+      </b-container>
     </b-card>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   name: "Card",
   props: ["url", "beer"],
+  computed: {
+    ...mapGetters(["getSearch"]),
+  },
 };
 </script>

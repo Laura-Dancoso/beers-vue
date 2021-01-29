@@ -25,7 +25,7 @@
       </div>
       <div class="flex-grow-1">
         <b-form-input
-          v-model="inputSearch"
+          v-model="search"
           trim
           variant="secondary"
           type="search"
@@ -54,14 +54,19 @@ export default {
   components: {
     NavbarFilter,
   },
-  data() {
-    return {
-      inputSearch: "",
-    };
-  },
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
+    },
+  },
+  computed: {
+    search: {
+      get() {
+        return this.$store.state.search;
+      },
+      set(value) {
+        this.$store.commit("updateSearch", value);
+      },
     },
   },
 };
