@@ -38,7 +38,7 @@
         >
         </b-form-input>
       </div>
-      <div v-if="$mq != 'mobile'"><NavbarFilter></NavbarFilter></div>
+      <div v-if="$mq != 'mobile'"><NavbarFilter to="/"></NavbarFilter></div>
     </b-navbar>
     <b-navbar
       v-if="$mq == 'mobile'"
@@ -47,7 +47,7 @@
       variant="light"
       sticky
     >
-      <NavbarFilter></NavbarFilter>
+      <NavbarFilter to="/sort"></NavbarFilter>
     </b-navbar>
   </div>
 </template>

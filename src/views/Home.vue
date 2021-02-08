@@ -31,6 +31,7 @@
             smallPadding: $mq != 'mobile',
             'pt-1': getSearchClick && getSearch.length > 0,
           },
+          'm-0',
         ]"
         ><b-col
           class="box"
@@ -92,6 +93,7 @@ export default {
   }
   .card-body {
     padding-bottom: 0;
+    width: 85%;
   }
   .card-title {
   }

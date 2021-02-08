@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar-nav class="float-right pr-1">
-      <b-nav-item href="#">
+      <b-nav-item :to="to">
         <svg
           id="sort"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,6 +52,7 @@
 <script>
 export default {
   name: "NavbarFilter",
+  props: ["to"],
 };
 </script>
 <style lang="scss" scoped>

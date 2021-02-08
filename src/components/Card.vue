@@ -13,22 +13,11 @@
             beer.name
           }}</b-card-title>
         </b-card-body>
-        <b-list-group
-          flush
-          class="text-left"
-          :class="[
-            {
-              'pt-4': $mq === 'mobile',
-              'pt-3': $mq == 'tablet',
-              'pt-2': $mq == 'laptop',
-              'pt-5': $mq == 'desktop',
-            },
-          ]"
-        >
-          <b-list-group-item class="h6 font-weight-light px-0 py-0"
+        <b-list-group flush class="text-left mt-3">
+          <b-list-group-item class="h6 font-weight-light pl-0 py-2 m-0"
             >{{ beer.abv }}% ABV</b-list-group-item
           >
-          <b-list-group-item class="h6 font-weight-light px-0"
+          <b-list-group-item class="h6 font-weight-light pl-0 py-2 m-0"
             >{{ beer.ibu }} IBU</b-list-group-item
           >
         </b-list-group>
