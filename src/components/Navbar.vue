@@ -38,7 +38,7 @@
         >
         </b-form-input>
       </div>
-      <div v-if="$mq != 'mobile'"><NavbarFilter to="/"></NavbarFilter></div>
+      <div v-if="$mq != 'mobile'"><NavbarFilter to="0"></NavbarFilter></div>
     </b-navbar>
     <b-navbar
       v-if="$mq == 'mobile'"
@@ -47,7 +47,7 @@
       variant="light"
       sticky
     >
-      <NavbarFilter to="/sort"></NavbarFilter>
+      <NavbarFilter to="1"></NavbarFilter>
     </b-navbar>
   </div>
 </template>
@@ -61,6 +61,7 @@ export default {
   methods: {
     scrollToTop() {
       window.scrollTo(0, 0);
+      this.$store.commit("updateSort", {});
     },
     checkSearchClickValue() {
       if (this.$store.getters.getSearch == "")

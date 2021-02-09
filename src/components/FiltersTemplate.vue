@@ -1,0 +1,30 @@
+<template>
+  <div class="d-flex flex-column align-items-start p-2 mt-3">
+    <router-link to="/">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="black"
+        width="30px"
+        height="30px"
+        @click="back"
+      >
+        <path
+          d="M20 11H6.83l2.88-2.88c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L3.71 11.3c-.39.39-.39 1.02 0 1.41L8.3 17.3c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L6.83 13H20c.55 0 1-.45 1-1s-.45-1-1-1z"
+        />
+      </svg>
+    </router-link>
+    <h3 class="p-0 m-0 my-2">{{ name }}</h3>
+  </div>
+</template>
+<script>
+export default {
+  name: "FiltersTemplate",
+  props: ["name"],
+  methods: {
+    back: function() {
+      this.$store.commit("updateSort", {});
+    },
+  },
+};
+</script>

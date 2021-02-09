@@ -13,12 +13,14 @@ export default new Vuex.Store({
     search: "",
     searchedBeers: [],
     searchClick: false,
+    sort: "",
   },
   getters: {
     getBeers: (state) => state.beers,
     getPage: (state) => state.page,
     getSearch: (state) => state.search,
     getSearchClick: (state) => state.searchClick,
+    getSort: (state) => state.sort,
   },
   mutations: {
     getBeers: function(state, payload) {
@@ -33,6 +35,9 @@ export default new Vuex.Store({
     changeSearchClick(state, click) {
       state.searchClick = click;
     },
+    updateSort(state, payload) {
+      state.sort = payload;
+    },
   },
   actions: {
     getData: async function(context, endpoint) {
@@ -43,16 +48,20 @@ export default new Vuex.Store({
       const data = await fetch(url);
       if (data.ok) {
         const json = await data.json();
-        const jsonBeers = json.map((beer) => {
-          return {
-            id: beer.id,
-            name: beer.name,
-            description: beer.description,
-            abv: beer.abv,
-            ibu: beer.ibu,
-            image_url: beer.image_url,
-          };
-        });
+        const jsonBeers = json
+          .map((beer) => {
+            return {
+              id: beer.id,
+              name: beer.name,
+              description: beer.description,
+              abv: beer.abv,
+              ibu: beer.ibu == null ? 0 : beer.ibu,
+              image_url: beer.image_url,
+            };
+          })
+          .sort((a, b) =>
+            a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+          );
         context.commit("getBeers", jsonBeers);
         context.commit("getPage", endpoint.page);
       } else {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar-nav class="float-right pr-1">
-      <b-nav-item :to="to">
+      <b-nav-item :to="to == 1 ? '/sort' : '/'">
         <svg
           id="sort"
           xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@
         </svg>
         Sort
       </b-nav-item>
-      <b-nav-item href="#">
+      <b-nav-item :to="to == 1 ? '/filter' : '/'">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           enable-background="new 0 0 24 24"

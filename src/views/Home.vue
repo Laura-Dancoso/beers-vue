@@ -57,11 +57,32 @@ export default {
     Card,
   },
   computed: {
-    ...mapGetters(["getBeers", "getPage", "getSearch", "getSearchClick"]),
+    ...mapGetters([
+      "getBeers",
+      "getPage",
+      "getSearch",
+      "getSearchClick",
+      "getSort",
+    ]),
     filterSearchedBeers() {
-      return this.getBeers.filter((b) =>
+      let filterSearchedBeers = this.getBeers.filter((b) =>
         b.name.toLowerCase().includes(this.getSearch)
       );
+      if (Object.keys(this.getSort).length == 0) {
+        return filterSearchedBeers;
+      } else {
+        filterSearchedBeers = filterSearchedBeers.sort((a, b) => {
+          switch (this.getSort.by) {
+            case "abv":
+              return a.abv - b.abv;
+            case "ibu":
+              return a.ibu - b.ibu;
+          }
+        });
+        return this.getSort.asc
+          ? filterSearchedBeers
+          : filterSearchedBeers.reverse();
+      }
     },
   },
   methods: {
