@@ -30,6 +30,20 @@
         @click="sort('ibu', false)"
         >More IBU</b-list-group-item
       >
+      <b-list-group-item
+        variant="secondary"
+        class="border border-none p-3 m-1"
+        button
+        @click="sort('name', true)"
+        >A-Z</b-list-group-item
+      >
+      <b-list-group-item
+        variant="secondary"
+        class="border border-none p-3 m-1"
+        button
+        @click="sort('name', false)"
+        >Z-A</b-list-group-item
+      >
     </b-list-group>
   </div>
 </template>
