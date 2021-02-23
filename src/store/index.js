@@ -14,6 +14,7 @@ export default new Vuex.Store({
     searchedBeers: [],
     searchClick: false,
     sort: "",
+    filter: "",
   },
   getters: {
     getBeers: (state) => state.beers,
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     getSearch: (state) => state.search,
     getSearchClick: (state) => state.searchClick,
     getSort: (state) => state.sort,
+    getFilter: (state) => state.filter,
   },
   mutations: {
     getBeers: function(state, payload) {
@@ -37,6 +39,9 @@ export default new Vuex.Store({
     },
     updateSort(state, payload) {
       state.sort = payload;
+    },
+    updateFilter(state, payload) {
+      state.filter = payload;
     },
   },
   actions: {

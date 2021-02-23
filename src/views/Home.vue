@@ -90,7 +90,7 @@ export default {
   },
 
   created() {
-    this.getData({ filter: "", page: 1 });
+    this.getData({ filter: this.$store.getters.getFilter, page: 1 });
   },
 };
 </script>
