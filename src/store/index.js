@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   //change to false when project is in production
-  strict: true,
+  strict: false,
   state: {
     page: "",
     beers: [],
