@@ -31,7 +31,6 @@
           variant="secondary"
           type="search"
           placeholder="Search a beer"
-          autofocus
           v-on:keyup.enter="
             if (search.length > 0) $store.commit('changeSearchClick', true);
           "

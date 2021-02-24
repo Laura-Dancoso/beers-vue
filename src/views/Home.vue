@@ -66,7 +66,7 @@ export default {
     ]),
     filterSearchedBeers() {
       let filterSearchedBeers = this.getBeers.filter((b) =>
-        b.name.toLowerCase().includes(this.getSearch)
+        b.name.toLowerCase().includes(this.getSearch.toLowerCase())
       );
       if (Object.keys(this.getSort).length == 0) {
         return filterSearchedBeers;
