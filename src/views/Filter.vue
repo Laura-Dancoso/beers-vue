@@ -30,8 +30,8 @@
           :enable-cross="false"
           :tooltip="'always'"
           :tooltip-placement="['bottom', 'top']"
-          :min="4"
-          :max="54"
+          :min="5"
+          :max="53"
         ></vue-slider>
       </b-list-group-item>
       <b-list-group-item variant="secondary" class="border border-none p-3 m-1"
@@ -62,7 +62,8 @@
           :enable-cross="false"
           :tooltip="'always'"
           :tooltip-placement="['bottom', 'top']"
-          :max="150"
+          :min="1"
+          :max="149"
         ></vue-slider>
       </b-list-group-item>
     </b-list-group>
@@ -87,8 +88,8 @@ export default {
   },
   data: function() {
     return {
-      value1: 4,
-      value2: 0,
+      value1: 10,
+      value2: 20,
       selected1: "lt",
       selected2: "lt",
     };
